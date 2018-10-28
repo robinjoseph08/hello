@@ -23,7 +23,7 @@ jobs:
           command: make setup
       - run:
           name: Install dependencies
-          command: make install
+          command: dep ensure -vendor-only
       - save_cache:
           key: vendor-{{ checksum "Gopkg.lock" }}
           paths:
