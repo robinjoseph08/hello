@@ -1,6 +1,8 @@
 DIRS ?= $(shell find . -name '*.go' | grep --invert-match 'vendor' | xargs -n 1 dirname | sort --unique)
+PKG_NAME := hello
 SETUP_PKGS := \
 	github.com/alecthomas/gometalinter \
+	github.com/codegangsta/gin \
 	github.com/golang/dep/cmd/dep \
 
 BFLAGS ?=
@@ -36,6 +38,11 @@ setup:
 	@echo "--> Installing linter"
 	go get -u -v $(SETUP_PKGS)
 	gometalinter --install
+
+.PHONY: start
+start:
+	@echo "---> Starting server"
+	gin --port 9990 --appPort 9991 --path . --build ./cmd/hello --immediate --bin ./bin/gin-$(PKG_NAME) run
 
 .PHONY: test
 test:

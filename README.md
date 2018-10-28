@@ -17,5 +17,5 @@ To run this API locally, you can run the following commands.
 ```sh
 $ make setup # needed the first time you clone the repo
 $ make install
-$ go run cmd/hello/main.go
+$ make start
 ```
