@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# This is a post-push hook that is run during Docker Cloud's Automated Build.
+# It's used to also tag the image with the short hash (first 7 characters) of
+# the commit.
+
+SHORT_HASH=${SOURCE_COMMIT:0:7}
+
+docker tag $IMAGE_NAME $DOCKER_REPO:$SHORT_HASH
+docker push $DOCKER_REPO:$SHORT_HASH
